@@ -18,5 +18,8 @@
   "homepage": "https://github.com/mnorkin/learning#readme",
   "dependencies": {
     "mocha": "^8.2.1"
+  },
+  "devDependencies": {
+    "prettier": "2.2.1"
   }
 }
