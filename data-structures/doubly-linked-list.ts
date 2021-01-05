@@ -1,17 +1,19 @@
-function Node(data) {
-  this.data = data;
-  this.next = null;
-  this.previous = null;
+export class Node {
+  constructor(
+    public data: number,
+    public next: Node | null = null,
+    public previous: Node | null = null
+  ) {}
 }
 
-class DoublyLinkedList {
-  constructor() {
-    this.head = null;
-    this.tail = null;
-    this.length = 0;
-  }
+export class DoublyLinkedList {
+  constructor(
+    public head: Node | null = null,
+    public tail: Node | null = null,
+    public length = 0
+  ) {}
 
-  add(data) {
+  add(data: number) {
     const node = new Node(data);
     if (!this.head) {
       this.head = node;
@@ -27,7 +29,7 @@ class DoublyLinkedList {
     this.length++;
   }
 
-  remove(data) {
+  remove(data: number) {
     let current = this.head;
     while (current) {
       if (current.data === data) {
@@ -56,12 +58,3 @@ class DoublyLinkedList {
     }
   }
 }
-
-
-const list = new DoublyLinkedList();
-
-list.add(12);
-list.add(23);
-list.add(34);
-
-console.log('list', list);
