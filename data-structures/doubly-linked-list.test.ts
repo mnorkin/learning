@@ -18,6 +18,32 @@ describe("Doubly linked list", () => {
     });
   });
 
+  describe("#addAfter", () => {
+    it("should insert right after head/tail", () => {
+      const list = new DoublyLinkedList();
+      list.add(12);
+      list.addAfter(23, 12);
+
+      expect(list.tail?.data).toEqual(23);
+    });
+
+    it("should have previous right after head/tail", () => {
+      const list = new DoublyLinkedList();
+      list.add(12);
+      list.addAfter(23, 12);
+
+      expect(list.tail?.previous?.data).toEqual(12);
+    });
+
+    it("should have previous tail not equal to head", () => {
+      const list = new DoublyLinkedList();
+      list.add(12);
+      list.addAfter(23, 12);
+
+      expect(list.tail?.data).not.toEqual(list.head?.data);
+    });
+  });
+
   describe("#remove", () => {
     it("should set head null given list length is 1", () => {
       const list = new DoublyLinkedList();
@@ -41,7 +67,7 @@ describe("Doubly linked list", () => {
       list.add(23);
       list.remove(23);
 
-      expect(list.tail.data).toEqual(12);
+      expect(list.tail?.data).toEqual(12);
     });
 
     it("should set head to the remaining element given list length is 2", () => {
@@ -50,7 +76,7 @@ describe("Doubly linked list", () => {
       list.add(23);
       list.remove(23);
 
-      expect(list.head.data).toEqual(12);
+      expect(list.head?.data).toEqual(12);
     });
   });
 });
