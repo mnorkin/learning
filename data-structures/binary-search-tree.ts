@@ -106,4 +106,66 @@ export class BinarySearchTree {
    * However, the stack is implemented impicitly.
    *
    */
+
+  /**
+   * Breadth-first traversal
+   *
+   * we first traverse through one level of children nodes, then through one level of grandchildren nodes, then through one level of grand-grandchildren nodes, etc.
+   */
+
+  traverseBF() {
+    if (!this.root) return;
+
+    const queue = [];
+    // push the root to the queue
+    queue.push(this.root);
+    const output: number[] = [];
+
+    // while queue is not empty
+    while (queue.length) {
+      // take the last element of the queue
+      const node = queue.shift();
+      if (!node) {
+        // if no nodes in the queue - return the output
+        return output;
+      }
+      if (node.left) {
+        // if node has left node - push it to the queue
+        queue.push(node.left);
+      }
+      if (node.right) {
+        // if node has right node - push it to the queue
+        queue.push(node.right);
+      }
+
+      output.push(node.data);
+    }
+
+    return output;
+  }
+
+  /**
+   * Finding minimum and maximum value
+   *
+   * Finding the minimum and maximum value in a binary search tree is easy.
+   * For minimum - you always know that the left subtree's values are lower than the current node.
+   * For maximum - you always know that the right subree's values are higher than the current node.
+   */
+
+  min() {
+    let node = this.root;
+    while (node?.left) {
+      node = node.left;
+    }
+    return node?.data;
+  }
+
+  max() {
+    let node = this.root;
+    while (node?.right) {
+      node = node.right;
+    }
+
+    return node?.data;
+  }
 }
