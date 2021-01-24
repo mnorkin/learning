@@ -70,3 +70,9 @@ console.log(
     3
   )}`
 );
+
+/**
+ * Time complexity O(N)
+ *
+ * Space complexity O(K), storing 'K+1' characters in the HashMap
+ */
