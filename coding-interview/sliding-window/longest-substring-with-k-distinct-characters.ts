@@ -21,15 +21,20 @@ function longest_substring_with_k_distinct(str: string, k: number) {
   let windowStart = 0;
   let longestWindow = 0;
   const hashmap: Record<string, number> = {};
-  const arr = str.split("");
-  for (let windowEnd = 0; windowEnd < arr.length; windowEnd++) {
-    hashmap[arr[windowEnd]] = (hashmap[arr[windowEnd]] ?? 0) + 1;
-    if (Object.keys(hashmap).length >= k - 1) {
-      windowStart += 1; // slide the window ahead
-      longestWindow = Math.min(longestWindow, windowEnd - windowStart + 1);
-      while (Object.keys(hashmap).length >= k - 1)
+  for (let windowEnd = 0; windowEnd < str.length; windowEnd++) {
+    hashmap[str[windowEnd]] = (hashmap[str[windowEnd]] ?? 0) + 1;
+    while (Object.keys(hashmap).length > k) {
+      const leftChar = str[windowStart];
+      hashmap[leftChar] -= 1;
+      if (hashmap[leftChar] === 0) {
+        delete hashmap[leftChar];
+      }
+      windowStart += 1; // shrink the window
     }
+    longestWindow = Math.max(longestWindow, windowEnd - windowStart + 1);
   }
+
+  return longestWindow;
 }
 
 /**
@@ -46,3 +51,22 @@ function longest_substring_with_k_distinct(str: string, k: number) {
  * 4. In each step, we will try to shrink the window from the beginning if the count of distinct characters in the hashmap
  * is larger than 'K'. We will shrink the window from the beginning if the count of distinct ()
  */
+
+console.log(
+  `Length of the longest substring: ${longest_substring_with_k_distinct(
+    "araaci",
+    2
+  )}`
+);
+console.log(
+  `Length of the longest substring: ${longest_substring_with_k_distinct(
+    "araaci",
+    1
+  )}`
+);
+console.log(
+  `Length of the longest substring: ${longest_substring_with_k_distinct(
+    "cbbebi",
+    3
+  )}`
+);
